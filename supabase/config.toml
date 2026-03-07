@@ -1,0 +1,12 @@
+project_id = "stratton"
+
+[api]
+port = 54321
+schemas = ["public", "storage", "graphql_public"]
+
+[db]
+port = 54322
+major_version = 15
+
+[functions.upload-token-image]
+verify_jwt = true

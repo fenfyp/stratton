@@ -1,0 +1,773 @@
+{
+  "address": "3ged954nQvfoyxzbRfKj1AtkR7UsPEHKggzhid5QE4EL",
+  "metadata": {
+    "name": "stratton",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "create_pool",
+      "docs": [
+        "Crée une nouvelle pool"
+      ],
+      "discriminator": [
+        233,
+        146,
+        209,
+        142,
+        207,
+        104,
+        64,
+        188
+      ],
+      "accounts": [
+        {
+          "name": "pool_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "arg",
+                "path": "pool_index"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool_state"
+              }
+            ]
+          }
+        },
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "platform_fee_wallet"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "pool_index",
+          "type": "u64"
+        },
+        {
+          "name": "target_net_lamports",
+          "type": "u64"
+        },
+        {
+          "name": "min_deposit_lamports",
+          "type": "u64"
+        },
+        {
+          "name": "max_per_wallet_lamports",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "deposit",
+      "docs": [
+        "Dépôt dans la pool"
+      ],
+      "discriminator": [
+        242,
+        35,
+        198,
+        137,
+        82,
+        225,
+        242,
+        182
+      ],
+      "accounts": [
+        {
+          "name": "pool_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool_state.creator",
+                "account": "PoolState"
+              },
+              {
+                "kind": "account",
+                "path": "pool_state.pool_index",
+                "account": "PoolState"
+              }
+            ]
+          }
+        },
+        {
+          "name": "contributor_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  116,
+                  114,
+                  105,
+                  98,
+                  117,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool_state"
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool_state"
+              }
+            ]
+          }
+        },
+        {
+          "name": "platform_fee_wallet",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "gross_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "exit",
+      "docs": [
+        "Exit (partiel ou total)"
+      ],
+      "discriminator": [
+        234,
+        32,
+        12,
+        71,
+        126,
+        5,
+        219,
+        160
+      ],
+      "accounts": [
+        {
+          "name": "pool_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool_state.creator",
+                "account": "PoolState"
+              },
+              {
+                "kind": "account",
+                "path": "pool_state.pool_index",
+                "account": "PoolState"
+              }
+            ]
+          }
+        },
+        {
+          "name": "contributor_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  116,
+                  114,
+                  105,
+                  98,
+                  117,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool_state"
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool_state"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "withdraw_net_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "init_contributor",
+      "discriminator": [
+        75,
+        119,
+        121,
+        220,
+        118,
+        193,
+        35,
+        30
+      ],
+      "accounts": [
+        {
+          "name": "contributor_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  116,
+                  114,
+                  105,
+                  98,
+                  117,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool_state"
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool_state",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool_state.creator",
+                "account": "PoolState"
+              },
+              {
+                "kind": "account",
+                "path": "pool_state.pool_index",
+                "account": "PoolState"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize",
+      "docs": [
+        "Initialise la config du programme (appelable une seule fois par l'admin)"
+      ],
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "program_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true,
+          "address": "AZPZ2x9oGZkBMmLLmVmYByiUokMEj8BcJwKURsvxJkNN"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "executor_wallet",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "withdraw_for_launch",
+      "docs": [
+        "Withdraw pour launch — appelable par n'importe qui ; les fonds vont au wallet plateforme"
+      ],
+      "discriminator": [
+        99,
+        156,
+        242,
+        29,
+        124,
+        244,
+        200,
+        14
+      ],
+      "accounts": [
+        {
+          "name": "program_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool_state.creator",
+                "account": "PoolState"
+              },
+              {
+                "kind": "account",
+                "path": "pool_state.pool_index",
+                "account": "PoolState"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool_state"
+              }
+            ]
+          }
+        },
+        {
+          "name": "platform_fee_wallet",
+          "writable": true
+        },
+        {
+          "name": "launch_wallet",
+          "writable": true
+        },
+        {
+          "name": "caller",
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "ContributorState",
+      "discriminator": [
+        8,
+        145,
+        65,
+        67,
+        224,
+        70,
+        107,
+        55
+      ]
+    },
+    {
+      "name": "PoolState",
+      "discriminator": [
+        247,
+        237,
+        227,
+        245,
+        215,
+        195,
+        222,
+        70
+      ]
+    },
+    {
+      "name": "ProgramConfig",
+      "discriminator": [
+        196,
+        210,
+        90,
+        231,
+        144,
+        149,
+        140,
+        63
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "PoolNotFilling",
+      "msg": "La pool n'est pas en état Filling"
+    },
+    {
+      "code": 6001,
+      "name": "PoolNotReady",
+      "msg": "La pool n'est pas en état Ready"
+    },
+    {
+      "code": 6002,
+      "name": "BelowMinDeposit",
+      "msg": "Montant en dessous du minimum"
+    },
+    {
+      "code": 6003,
+      "name": "ExceedsMaxPerWallet",
+      "msg": "Dépasse le maximum par wallet"
+    },
+    {
+      "code": 6004,
+      "name": "InsufficientFunds",
+      "msg": "Fonds insuffisants"
+    },
+    {
+      "code": 6005,
+      "name": "ZeroAmount",
+      "msg": "Montant zéro non autorisé"
+    },
+    {
+      "code": 6006,
+      "name": "Unauthorized",
+      "msg": "Non autorisé"
+    },
+    {
+      "code": 6007,
+      "name": "Overflow",
+      "msg": "Overflow arithmétique"
+    }
+  ],
+  "types": [
+    {
+      "name": "ContributorState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "contributed_net_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "pending_fee_lamports",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "pool_index",
+            "type": "u64"
+          },
+          {
+            "name": "platform_fee_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "target_net_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "min_deposit_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "max_per_wallet_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "total_contributed_net_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "bonus_pool_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "total_pending_fees_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "PoolStatus"
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "vault_bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Filling"
+          },
+          {
+            "name": "Ready"
+          },
+          {
+            "name": "Launched"
+          },
+          {
+            "name": "Cancelled"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProgramConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "executor_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}

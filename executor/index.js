@@ -7,7 +7,7 @@ const { createClient } = require("@supabase/supabase-js");
 const { launchOnPumpFun } = require("./pumpfun");
 const { distributeTokens } = require("./distribute");
 
-const IDL_PATH = path.join(__dirname, "../app/src/lib/stratton-idl.json");
+const IDL_PATH = path.join(__dirname, "stratton-idl.json");
 const POLL_INTERVAL_MS = 5_000;
 const RETRY_INTERVAL_MS = 60_000;
 const MAX_PUMP_FUN_RETRIES = 3;

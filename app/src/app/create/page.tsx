@@ -92,6 +92,7 @@ export default function CreatePoolPage() {
         description: description.trim() || null,
         creator_wallet: publicKey.toBase58(),
         pump_fun_url: null,
+        mint_address: null,
         image_url: null,
         created_at: new Date().toISOString(),
         last_deposit_at: null,
